@@ -1,184 +1,209 @@
 {
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "title": "native-schema_response_v1_0",
-    "description": "json schema for a Native v1.0 response",
-    "type": "object",
-    "required": [ "native" ],
-    "properties": {
-        "native": {
-            "$ref": "#/definitions/native"
-        }
-    },
-    "definitions": {
-        "native": {
-            "type": "object",
-            "required": [ "assets", "link" ],
-            "properties": {
-                "ver": {
-                    "$ref": "#/definitions/positive_int"
-                },
-                "assets": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/asset"
-                    }
-                },
-                "link": {
-                    "$ref": "#/definitions/link"
-                },
-                "imptrackers": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "jstracker": {
-                    "type": "string"
-                },
-                "ext": {
-                    "type": "object"
-                }
-            }
-        },
-        "asset": {
-            "type": "object",
-            "required": [ "id" ],
-            "oneOf": [
-                {
-                    "required": [ "title" ]
-                },
-                {
-                    "required": [ "img" ]
-                },
-                {
-                    "required": [ "video" ]
-                },
-                {
-                    "required": [ "data" ]
-                }
-            ],
-            "properties": {
-                "id": {
-                    "type": "integer"
-                },
-                "required": {
-                    "$ref": "#/definitions/boolean_int"
-                },
-                "title": {
-                    "$ref": "#/definitions/title"
-                },
-                "img": {
-                    "$ref": "#/definitions/image"
-                },
-                "video": {
-                    "$ref": "#/definitions/video"
-                },
-                "data": {
-                    "$ref": "#/definitions/data"
-                },
-                "link": {
-                    "$ref": "#/definitions/link"
-                },
-                "ext": {
-                    "type": "object"
-                }
-            }
-        },
-        "title": {
-            "type": "object",
-            "required": [ "text" ],
-            "properties": {
-                "text": {
-                    "type": "string"
-                },
-                "ext": {
-                    "type": "object"
-                }
-            }
-        },
-        "image": {
-            "type": "object",
-            "required": [ "url" ],
-            "properties": {
-                "url": {
-                    "type": "string"
-                },
-                "w": {
-                    "$ref": "#/definitions/positive_int"
-                },
-                "h": {
-                    "$ref": "#/definitions/positive_int"
-                },
-                "ext": {
-                    "type": "object"
-                }
-            }
-        },
-        "data": {
-            "type": "object",
-            "required": [ "value" ],
-            "properties": {
-                "label": {
-                    "type": "string"
-                },
-                "value": {
-                    "type": "string"
-                },
-                "ext": {
-                    "type": "object"
-                }
-            }
-        },
-        "video": {
-            "type": "object",
-            "required": [ "vasttag" ],
-            "properties": {
-                "vasttag": {
-                    "type": "string"
-                }
-            }
-        },
-        "link": {
-            "type": "object",
-            "required": [ "url" ],
-            "properties": {
-                "url": {
-                    "type": "string"
-                },
-                "clicktrackers": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "fallback": {
-                    "type": "string"
-                },
-                "ext": {
-                    "type": "object"
-                }
-            }
-        },
-
-
-        "data_asset_type": {
-            "type": "integer",
-            "minimum": 1
-        },
-        "image_asset_type": {
-            "type": "integer",
-            "minimum": 1
-        },
-
-
-        "boolean_int": {
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 1
-        },
-        "positive_int": {
-            "type": "integer",
-            "minimum": 0
-        }
-    }
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"definitions": {
+		"asset": {
+			"oneOf": [
+				{
+					"required": [
+						"title"
+					]
+				},
+				{
+					"required": [
+						"img"
+					]
+				},
+				{
+					"required": [
+						"video"
+					]
+				},
+				{
+					"required": [
+						"data"
+					]
+				}
+			],
+			"properties": {
+				"data": {
+					"$ref": "#/definitions/data"
+				},
+				"ext": {
+					"$ref": "#/definitions/ext"
+				},
+				"id": {
+					"type": "integer"
+				},
+				"img": {
+					"$ref": "#/definitions/image"
+				},
+				"link": {
+					"$ref": "#/definitions/link"
+				},
+				"required": {
+					"$ref": "#/definitions/boolean_int"
+				},
+				"title": {
+					"$ref": "#/definitions/title"
+				},
+				"video": {
+					"$ref": "#/definitions/video"
+				}
+			},
+			"required": [
+				"id"
+			],
+			"type": "object"
+		},
+		"boolean_int": {
+			"maximum": 1,
+			"minimum": 0,
+			"type": "integer"
+		},
+		"data": {
+			"properties": {
+				"ext": {
+					"$ref": "#/definitions/ext"
+				},
+				"label": {
+					"type": "string"
+				},
+				"value": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"value"
+			],
+			"type": "object"
+		},
+		"data_asset_type": {
+			"minimum": 1,
+			"type": "integer"
+		},
+		"ext": {
+			"additionalProperties": true,
+			"type": "object"
+		},
+		"image": {
+			"properties": {
+				"ext": {
+					"$ref": "#/definitions/ext"
+				},
+				"h": {
+					"$ref": "#/definitions/positive_int"
+				},
+				"url": {
+					"type": "string"
+				},
+				"w": {
+					"$ref": "#/definitions/positive_int"
+				}
+			},
+			"required": [
+				"url"
+			],
+			"type": "object"
+		},
+		"image_asset_type": {
+			"minimum": 1,
+			"type": "integer"
+		},
+		"link": {
+			"properties": {
+				"clicktrackers": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array"
+				},
+				"ext": {
+					"$ref": "#/definitions/ext"
+				},
+				"fallback": {
+					"type": "string"
+				},
+				"url": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"url"
+			],
+			"type": "object"
+		},
+		"native": {
+			"properties": {
+				"assets": {
+					"items": {
+						"$ref": "#/definitions/asset"
+					},
+					"type": "array"
+				},
+				"ext": {
+					"$ref": "#/definitions/ext"
+				},
+				"imptrackers": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array"
+				},
+				"jstracker": {
+					"type": "string"
+				},
+				"link": {
+					"$ref": "#/definitions/link"
+				},
+				"ver": {
+					"$ref": "#/definitions/positive_int"
+				}
+			},
+			"required": [
+				"assets",
+				"link"
+			],
+			"type": "object"
+		},
+		"positive_int": {
+			"minimum": 0,
+			"type": "integer"
+		},
+		"title": {
+			"properties": {
+				"ext": {
+					"$ref": "#/definitions/ext"
+				},
+				"text": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"text"
+			],
+			"type": "object"
+		},
+		"video": {
+			"properties": {
+				"vasttag": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"vasttag"
+			],
+			"type": "object"
+		}
+	},
+	"description": "json schema for a Native v1.0 response",
+	"properties": {
+		"native": {
+			"$ref": "#/definitions/native"
+		}
+	},
+	"required": [
+		"native"
+	],
+	"title": "native-schema_response_v1_0",
+	"type": "object"
 }

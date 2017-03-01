@@ -28,10 +28,14 @@
 			"$ref": "#/definitions/nobid_reason"
 		},
 		"ext": {
-			"type": "object"
+			"$ref": "#/definitions/ext"
 		}
 	},
 	"definitions": {
+		"ext": {
+			"type": "object",
+			"additionalProperties": true
+		},
 		"seatbid": {
 			"type": "object",
 			"required": [ "bid" ],
@@ -50,7 +54,7 @@
 					"$ref": "#/definitions/boolean_int"
 				},
 				"ext": {
-					"type": "object"
+					"$ref": "#/definitions/ext"
 				}
 			}
 		},
@@ -118,7 +122,7 @@
 					"$ref": "#/definitions/positive_int"
 				},
 				"ext": {
-					"type": "object"
+					"$ref": "#/definitions/ext"
 				}
 			}
 		},
